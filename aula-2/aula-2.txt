@@ -1,0 +1,85 @@
+* NodeJS Aula 2
+
+1. Criar projeto NodeJS
+
+npm init -y
+
+
+2. Criar arquivo fonte
+
+touch index.js
+
+
+3. Executar arquivo fonte
+
+node index.js
+
+
+-------------------------------
+
+
+* Operadores aritméticos
+
++   Soma
+-   Subtração
+*   Multiplicação
+/   Divisão
+%   Módulo
+
+**  Potência
+
+-------------------------------
+
+
+* Operadores combinados [Atalhos | Aritméticos de atribuição]
+
++=
+-=
+*=
+/=
+
+-------------------------------
+
+
+* Operadores de comparação
+
+>       Maior que
+<       Menor que
+>=      Maior ou igual
+<=      Menor ou igual
+
+==      Igual a
+===     Estritamente igual a
+
+!=      Diferente de
+!==     Estritamente diferente de
+
+
+// Operadores de comparação
+console.log(10 >= 8);
+
+// === Estritamento igual a [Compara o valor e o tipo]
+console.log('10' == 10);
+console.log('10' === 10);
+
+// === Estritamento diferente a [Compara o valor e o tipo]
+console.log('10' != 10);
+console.log('10' !== 10);
+
+console.log('tux' === "tux")
+true
+
+console.log("Tux" === "tux")
+false
+
+-------------------------------
+
+
+* Operadores lógicos
+
+&&
+||
+!
+
+-------------------------------
+

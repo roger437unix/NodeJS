@@ -1,0 +1,81 @@
+* NodeJS Aula 1
+
+1. Criar projeto NodeJS
+
+npm init -y
+
+
+2. Criar arquivo fonte
+
+touch index.js
+
+
+3. Editar arquivo index.js
+
+console.log("Hello, World!")
+
+
+4. Executar arquivo fonte
+
+node index.js
+
+
+-------------------------------
+
+5. Variáveis em NodeJS
+
+// const | let | var
+
+- var       ->      Variável globais
+- const     ->      Possuem scopo local, sendo variável imutável (constante)
+- let       ->      Possuem scopo local, sendo variável mutável  (constante)
+
+
+-------------------------------
+
+* Tipos de variáveis
+
+const string = "tux";
+const number = 22;
+const boolean = true;
+const array = [];
+const object = {};
+const func = () => {};
+const date = new Date();
+
+
+* Identificação de tipos de variáveis
+
+// Identificar o tipo da variável
+// console.log(typeof 10);
+// console.log(typeof 10.5);
+// console.log(typeof '10');
+// console.log(typeof true);
+// console.log(typeof [1, 2]);
+// console.log(typeof { idade: 20 });
+// console.log(typeof function () {});
+
+console.log(typeof null);
+console.log(typeof x);
+
+
+* Boas práticas para nomes de variáveis
+
+- Nomes em inglês
+- Evitar enumerar
+- camelCase
+- Nome semântico
+
+Exemplo: Diretório atual de trabalho [pwd]
+
+const processCurrentWorkDirectory = process.cwd()
+
+
+-------------------------------
+
+* Concatenação texto e variável
+
+const name = 'Tux';
+
+console.log('Seja bem-vindo ' + name + '.');
+console.log(`Seja bem-vindo ${name}.`);
