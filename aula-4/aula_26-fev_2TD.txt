@@ -1,0 +1,105 @@
+
+1. Operadores de comparação
+
+=== Estritamento igual a [Compara o valor e o tipo]
+
+console.log('10' == 10);
+true
+
+console.log('10' === 10);
+false
+
+console.log('tux' === "tux")
+true
+
+console.log("Tux" === "tux")
+false
+
+!== Estritamento diferente a [Compara o valor e o tipo]
+
+console.log('10' != 10);
+false
+
+console.log('10' !== 10);
+true
+
+console.log(!!!!(10 !== "10"));
+true
+
+--------------------------------------------------------------------------
+
+
+2. Validação de números com função isNaN()
+
+isNaN(10)
+false
+
+!isNaN(10)
+true
+
+isNaN('juca')
+true
+
+!isNaN('juca')
+false
+
+---------------------------------
+
+if (!isNaN(68/1.7**2)) {(68/1.7**2).toFixed(1)} else {'Valores inválidos'}
+'23.5'
+
+if (!isNaN(68/1.7**'2')) {(68/1.7**2).toFixed(1)} else {'Valores inválidos'}
+'23.5'
+
+if (!isNaN(68/1.7**'a')) {(68/1.7**2).toFixed(1)} else {'Valores inválidos'}
+'Valores inválidos'
+
+--------------------------------------------------------------------------
+
+
+3. Operador condicional ternário
+
+* Sintaxe: (teste lógico) ? [se verdadeiro] : [se falso]
+
+
+// Exemplo: Verificar se um número é par ou impar
+
+const num = 7;
+const result = (num % 2 === 0) ? 'par' : 'impar';
+console.log(`${num} é ${result}.`);
+console.log(`${num} -> ${typeof num}`)
+
+Obs.: Mudar o valor da variável 'num' para string numérica e verificar que o resultado continua sendo par ou impar.
+Obs.: Mudar o valor da variável 'num' para string alpha e verificar que o resultado será impar.
+
+Obs.: Adicionar validação na saída com operador ternário e isNaN.
+const result = (!isNaN(num) ? (num % 2 === 0) ? 'par' : 'impar' : 'string')
+
+
+--------------------------------------------------------------------------
+
+
+// Exercício: Maior|menor de idade validando com isNaN e utilizando operador ternário
+
+let idade = 18;
+const result2 = (idade>0 && idade<=120) ? (idade>17) ? 'Maior de idade': 'Menor de idade' : 'Idade inválida';
+console.log(`${idade} => ${result2}`);
+
+
+--------------------------------------------------------------------------
+
+
+// Exercício: Imc validando com isNaN e utilizando operador ternário
+
+const readline = require('readline-sync');
+let peso = Number(readline.question('Seu peso? '));
+let altura = Number(readline.question('Sua altura? '));
+const imc = peso / altura ** 2;
+
+const estado = (imc<17) ? 'Muito abaixo do peso' : (imc>=17 && imc<18.5) ? 'Abaixo do peso' : (imc>=18.5 && imc<25) ? 'Peso normal' : (imc>=25 && imc<30) ? 
+'Acima do peso' : (imc>=30 && imc<35) ? 'Obesidade 1' : (imc>=35 && imc < 40) ? 'Obesidade 2' : !isNaN ? 'Obesidade 3' : 'Indeterminado';
+
+console.log('Imc:', !(isNaN(imc)) ? imc.toFixed(1) : 'Valores inválidos');
+console.log('Estado:', estado)
+
+--------------------------------------------------------------------------
