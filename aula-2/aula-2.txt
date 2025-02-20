@@ -52,17 +52,26 @@ console.log(10 >= 8);
 
 // === Estritamento igual a [Compara o valor e o tipo]
 console.log('10' == 10);
-console.log('10' === 10);
+true
 
-// === Estritamento diferente a [Compara o valor e o tipo]
-console.log('10' != 10);
-console.log('10' !== 10);
+console.log('10' === 10);
+false
 
 console.log('tux' === "tux")
 true
 
 console.log("Tux" === "tux")
 false
+
+// !== Estritamento diferente a [Compara o valor e o tipo]
+console.log('10' != 10);
+false
+
+console.log('10' !== 10);
+true
+
+console.log(!!!!(10 !== "10"));
+true
 
 -------------------------------
 
