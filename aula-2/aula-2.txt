@@ -1,22 +1,17 @@
 * NodeJS Aula 2
 
 1. Criar projeto NodeJS
-
 npm init -y
 
 
 2. Criar arquivo fonte
-
 touch index.js
 
 
 3. Executar arquivo fonte
-
 node index.js
 
-
 -------------------------------
-
 
 * Operadores aritméticos
 
@@ -25,11 +20,9 @@ node index.js
 *   Multiplicação
 /   Divisão
 %   Módulo
-
 **  Potência
 
 -------------------------------
-
 
 * Operadores combinados [Atalhos | Aritméticos de atribuição]
 
@@ -39,7 +32,6 @@ node index.js
 /=
 
 -------------------------------
-
 
 * Operadores de comparação
 
@@ -55,7 +47,7 @@ node index.js
 !==     Estritamente diferente de
 
 
-// Operadores de comparação
+// Exemplos de comparação
 console.log(10 >= 8);
 
 // === Estritamento igual a [Compara o valor e o tipo]
@@ -74,7 +66,6 @@ false
 
 -------------------------------
 
-
 * Operadores lógicos
 
 &&
@@ -82,4 +73,3 @@ false
 !
 
 -------------------------------
-
