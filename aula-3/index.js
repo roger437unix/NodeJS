@@ -1,12 +1,16 @@
 
-// https://www.codecademy.com/article/getting-user-input-in-node-js
+/* Entrada de dados com readline-sync */
 
-// npm init -y
+// npm install readline-sync
 
-// npm install prompt-sync
+const readline = require('readline-sync');
 
-const prompt = require('prompt-sync')({sigint: true});
+const nome = readline.question('Seu nome: ');
+let peso = Number(readline.question('Informe seu peso: '));
+let altura = Number(readline.question('Informe sua altura: '));
 
-const num = prompt('Enter a number: ');
-console.log('Your number + 4 =');
-console.log(Number(num) + 4);
+const imc = peso / altura ** 2;
+
+console.log('Nome:', nome);
+console.log(`Nome: ${nome ** 2}`);  // NAN
+console.log(`Imc: ${imc.toFixed(0)}`);
