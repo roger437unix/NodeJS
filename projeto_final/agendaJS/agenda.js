@@ -24,26 +24,26 @@ function menu() {
 
 function cadastrar_usuario() {
     process.stdout.write(CLS);
-    console.log('\n** Cadastrar usuário **')
-    const nome = readline.question("\nNome: ")
-    const fone = readline.question("Telefone: ")
-    const email = readline.question('E-mail: ')
+    console.log('\n** Cadastrar usuário **');
+    const nome = readline.question("\nNome: ");
+    const fone = readline.question("Telefone: ");
+    const email = readline.question('E-mail: ');
 
     if (nome != '' && fone != '' && email != '') {
-        dic[nome] = { 'fone': fone, 'email': email }
-        console.log('\n** Usuário cadastrato com sucesso! **')
+        dic[nome] = { 'fone': fone, 'email': email };
+        console.log(`\n** Usuário [${nome}] cadastrato com sucesso! **`);
         gravar_agenda(true);
     }
     else {
-        console.log('\n** Usuário não cadastrato, todos os dados devem ser fornecidos **')
+        console.log('\n** Usuário não cadastrato, todos os dados devem ser fornecidos **');
     }
-    readline.question('\nPressione Enter para continuar.')
+    readline.question('\nPressione Enter para continuar.');
 }
 
 function buscar_usuario() {
     ref = listar_todos_usuarios(true);
     if (ref) {
-        const user = readline.question('\nQual usuário deseja listar dados? ')
+        const user = readline.question('\nQual usuário deseja listar dados? ');
 
         // Para nome
         if (isNaN(user)) {
@@ -110,7 +110,7 @@ function listar_todos_usuarios(ref = false) {
 
 
 function remover_usuario() {
-    ref = listar_todos_usuarios(true)
+    ref = listar_todos_usuarios(true);
 
     if (ref) {
         const user = readline.question('\nQual usuário deseja remover? ');
@@ -144,8 +144,8 @@ function remover_usuario() {
             }
         }
         else {
-            print('\nUsuário não cadastrado')
-            input('\nPressione Enter para continuar.')
+            print('\nUsuário não cadastrado');
+            input('\nPressione Enter para continuar.');
         }
     }
 }
@@ -156,10 +156,13 @@ function limpar_agenda() {
     if (ref) {
         const op = readline.question('\nToda a agenda será apagada. Continuar? [N/s] ');
         if (op === 's') {
-            dic = {};
-            gravar_agenda(true);
-            console.log('\n** Todos registros foram apagados **');
-            readline.question('\nPressione Enter para continuar.');
+            const op = readline.question('\nTem certeza? [N/s] ');
+            if (op === 's') {
+                dic = {};
+                gravar_agenda(true);
+                console.log('\n** Todos registros foram apagados **');
+                readline.question('\nPressione Enter para continuar.');
+            }
         }
     }
 }
@@ -169,6 +172,7 @@ function ler_agenda(ref = false) {
     process.stdout.write(CLS);
     const file1 = './agenda.json';
 
+    // Verificar se arquivo "agenda.json" existe
     if (!fs.existsSync(file1)) {
         gravar_agenda(true);
     }
@@ -229,6 +233,7 @@ function sair() {
 
 
 //-------------------------------------------------
+
 
 ler_agenda(true);
 
