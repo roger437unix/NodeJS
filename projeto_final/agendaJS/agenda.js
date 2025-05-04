@@ -22,6 +22,7 @@ function menu() {
     return op;
 }
 
+
 function cadastrar_usuario() {
     process.stdout.write(CLS);
     console.log('\n** Cadastrar usuário **');
@@ -30,15 +31,50 @@ function cadastrar_usuario() {
     const email = readline.question('E-mail: ');
 
     if (nome != '' && fone != '' && email != '') {
-        dic[nome] = { 'fone': fone, 'email': email };
-        console.log(`\n** Usuário [${nome}] cadastrato com sucesso! **`);
-        gravar_agenda(true);
+        if (validarFone(fone)) {
+            if (validarEmail(email)) {
+                dic[nome] = { 'fone': fone, 'email': email };
+                console.log(`\n** Usuário [${nome}] cadastrato com sucesso! **`);
+                gravar_agenda(true);
+            }
+            else {
+                console.log('\n** E-mail inválido **');
+            }
+        }
+        else {
+            console.log('\n** Telefone inválido **');
+        }
     }
     else {
         console.log('\n** Usuário não cadastrato, todos os dados devem ser fornecidos **');
     }
     readline.question('\nPressione Enter para continuar.');
 }
+
+
+// Retorna true se email válido
+function validarEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (regex.test(email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+// Retorna true se fone válido no formato "11 99999-9999" ou "11 2222-2222"
+function validarFone(fone) {
+    const regex = /^\d{2}\s\d{4,5}-\d{4}$/;
+
+    if (regex.test(fone)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 
 function buscar_usuario() {
     ref = listar_todos_usuarios(true);
@@ -176,7 +212,7 @@ function ler_agenda(ref = false) {
     if (!fs.existsSync(file1)) {
         gravar_agenda(true);
     }
-    
+
     const fileBuffer = fs.readFileSync(file1, 'utf-8');
     const contentJson = JSON.parse(fileBuffer);
     dic = contentJson;
@@ -184,7 +220,7 @@ function ler_agenda(ref = false) {
     if (!ref) {
         console.log('\n*** Agenda atualizada ***');
         readline.question('\nPressione Enter para continuar.');
-    }        
+    }
 }
 
 
