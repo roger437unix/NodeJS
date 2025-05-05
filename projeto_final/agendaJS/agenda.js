@@ -1,5 +1,5 @@
 // Agenda gravando e lendo arquivo CSV
-// Finalizado 02/mai/2025
+// Finalizado 05/mai/2025
 
 const readline = require('readline-sync');
 const fs = require('fs');
@@ -24,7 +24,7 @@ const FBRANCO   = '\u001b[47m';
 
 const NORMAL    = '\u001b[m';
 const NEGRITO   = '\u001b[1m';
-const SUBLINADO = '\u001b[4m';
+const SUBLINHADO = '\u001b[4m';
 
 
 dic = {}
@@ -118,7 +118,7 @@ function buscar_usuario() {
             }
         }
         // Para número [índice]
-        else {
+        else if (!isNaN(user)) {
             const index = Number(user);
             const tam = Object.keys(dic).length;
 
@@ -135,7 +135,7 @@ function buscar_usuario() {
                     i++;
                 }
             }
-            else {
+            else if (user != '') {
                 console.log(`\n${NEGRITO}${VERMELHO}Índice [${index}] inexistente.${NORMAL}`);
             }
         }
@@ -171,6 +171,8 @@ function remover_usuario() {
     ref = listar_todos_usuarios(true);
 
     if (ref) {
+
+        // Variável para suprimir duplicidade de mensagem na saída
         let usuarioCadastrado = false;        
 
         const user = readline.question(`\n${NEGRITO}${AMARELO}Qual usuário deseja remover?${NORMAL} `);
@@ -181,7 +183,8 @@ function remover_usuario() {
                     const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op === 's') {
                         delete dic[user];
-                        gravar_agenda(true);                        
+                        gravar_agenda(true);
+                        usuarioCadastrado = true;                        
                         break;
                     }
                     usuarioCadastrado = true;
@@ -200,7 +203,8 @@ function remover_usuario() {
                     const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}. ${nome}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op == 's') {
                         delete dic[nome];
-                        gravar_agenda(true);                        
+                        gravar_agenda(true);
+                        usuarioCadastrado = true;                       
                         break;
                     }
                     usuarioCadastrado = true;
