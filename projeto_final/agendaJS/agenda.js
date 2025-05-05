@@ -4,12 +4,33 @@
 const readline = require('readline-sync');
 const fs = require('fs');
 
-const CLS = '\x1Bc';
+
+const CLS       = '\x1Bc';
+const BLACK     = '\u001b[30m';
+const VERMELHO  = '\u001b[31m';
+const VERDE     = '\u001b[32m';
+const AMARELO   = '\u001b[33m';
+const AZUL      = '\u001b[34m';
+const MAGENTA   = '\u001b[35m';
+const CIANO     = '\u001b[36m';
+
+const FVERMELHO = '\u001b[41m';
+const FVERDE    = '\u001b[42m';
+const FAMARELO  = '\u001b[43m';
+const FAZUL     = '\u001b[44m';
+const FMAGENTA  = '\u001b[45m';
+const FCIANO    = '\u001b[46m';
+const FBRANCO   = '\u001b[47m';
+
+const NORMAL    = '\u001b[m';
+const NEGRITO   = '\u001b[1m';
+const SUBLINADO = '\u001b[4m';
+
 
 dic = {}
 
 function menu() {
-    console.log('\n** Agenda **\n');
+    console.log(`\n${NEGRITO}${FAZUL}** Agenda **${NORMAL}\n`);
     console.log('1. Cadastrar usuário');
     console.log('2. Mostrar dados de um usuário');
     console.log('3. Listar todos nomes cadastrados');
@@ -18,7 +39,7 @@ function menu() {
     console.log('6. Gravar arquivo');
     console.log('7. Ler arquivo');
     console.log('8. Sair');
-    const op = Number(readline.question('\nOpção: '));
+    const op = Number(readline.question(`\n${NEGRITO}${VERDE}Opção: ${NORMAL}`));
     return op;
 }
 
@@ -34,21 +55,21 @@ function cadastrar_usuario() {
         if (validarFone(fone)) {
             if (validarEmail(email)) {
                 dic[nome] = { 'fone': fone, 'email': email };
-                console.log(`\n** Usuário [${nome}] cadastrato com sucesso! **`);
+                console.log(`\n${NEGRITO}${AZUL}** Usuário [${nome}] cadastrato com sucesso! **${NORMAL}`);
                 gravar_agenda(true);
             }
             else {
-                console.log('\n** E-mail inválido **');
+                console.log(NEGRITO, VERMELHO, '\n** E-mail inválido **', NORMAL);
             }
         }
         else {
-            console.log('\n** Telefone inválido **');
+            console.log(NEGRITO, VERMELHO, '\n** Telefone inválido **', NORMAL);
         }
     }
     else {
-        console.log('\n** Usuário não cadastrato, todos os dados devem ser fornecidos **');
+        console.log(NEGRITO, VERMELHO, '\n** Usuário não cadastrato, todos os dados devem ser fornecidos **', NORMAL);
     }
-    readline.question('\nPressione Enter para continuar.');
+    readline.question(`\n${VERDE}Pressione Enter para continuar.${NORMAL}`);
 }
 
 
@@ -93,7 +114,7 @@ function buscar_usuario() {
                 }
             }
             else {
-                console.log(`\nUsuário "${user}" não cadastrado.`);
+                console.log(`\n ${NEGRITO}${VERMELHO} Usuário "${user}" não cadastrado. ${NORMAL}`);
             }
         }
         // Para número [índice]
@@ -115,10 +136,10 @@ function buscar_usuario() {
                 }
             }
             else {
-                console.log(`\nÍndice [${index}] inexistente.`);
+                console.log(`\n ${NEGRITO}${VERMELHO} Índice [${index}] inexistente. ${NORMAL}`);
             }
         }
-        readline.question('\nPressione Enter para continuar.');
+        readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
     }
 }
 
@@ -127,7 +148,7 @@ function listar_todos_usuarios(ref = false) {
     process.stdout.write(CLS);
     if (Object.values(dic).length === 0) {
         console.log('\n** Nao há usuário cadastrado! **');
-        readline.question('\nPressione Enter para continuar.');
+        readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
         return false;
     }
     else {
@@ -141,7 +162,7 @@ function listar_todos_usuarios(ref = false) {
             return true;
         }
     }
-    readline.question('\nPressione Enter para continuar.');
+    readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
 }
 
 
@@ -149,12 +170,12 @@ function remover_usuario() {
     ref = listar_todos_usuarios(true);
 
     if (ref) {
-        const user = readline.question('\nQual usuário deseja remover? ');
+        const user = readline.question(`\n${NEGRITO}${AMARELO}Qual usuário deseja remover?${NORMAL} `);
 
         if (isNaN(user)) {
             for (let nome in dic) {
                 if (nome === user) {
-                    const op = readline.question(`\nUsuário [${user}] será removido. Continuar? [N/s]: `);
+                    const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op === 's') {
                         delete dic[user];
                         gravar_agenda(true);
@@ -169,7 +190,7 @@ function remover_usuario() {
             let i = 1;
             for (let nome in dic) {
                 if (i === index) {
-                    const op = readline.question(`\nUsuário [${user}. ${nome}] será removido. Continuar? [N/s]: `);
+                    const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}. ${nome}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op == 's') {
                         delete dic[nome];
                         gravar_agenda(true);
@@ -180,8 +201,8 @@ function remover_usuario() {
             }
         }
         else {
-            print('\nUsuário não cadastrado');
-            input('\nPressione Enter para continuar.');
+            print(NEGRITO, VERMELHO, '\nUsuário não cadastrado', NORMAL);
+            input(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
         }
     }
 }
@@ -197,7 +218,7 @@ function limpar_agenda() {
                 dic = {};
                 gravar_agenda(true);
                 console.log('\n** Todos registros foram apagados **');
-                readline.question('\nPressione Enter para continuar.');
+                readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
             }
         }
     }
@@ -218,8 +239,8 @@ function ler_agenda(ref = false) {
     dic = contentJson;
 
     if (!ref) {
-        console.log('\n*** Agenda atualizada ***');
-        readline.question('\nPressione Enter para continuar.');
+        console.log(`\n${NEGRITO}${AZUL}*** Agenda atualizada ***${NORMAL}`);
+        readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
     }
 }
 
@@ -256,8 +277,8 @@ function gravar_agenda(ref = false) {
     });
 
     if (!ref) {
-        console.log('\n*** Arquivos salvos em disco ***');
-        readline.question('\nPressione Enter para continuar.');
+        console.log(`\n${NEGRITO}${AZUL}*** Arquivos salvos em disco ***${NORMAL}`);
+        readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
     }
 }
 
