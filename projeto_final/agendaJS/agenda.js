@@ -46,9 +46,9 @@ function menu() {
 
 function cadastrar_usuario() {
     process.stdout.write(CLS);
-    console.log('\n** Cadastrar usuário **');
+    console.log(`\n${NEGRITO}${AZUL}** Cadastrar usuário **${NORMAL}`);
     const nome = readline.question("\nNome: ");
-    const fone = readline.question("Telefone: ");
+    const fone = readline.question("Fone [ddd]: ");
     const email = readline.question('E-mail: ');
 
     if (nome != '' && fone != '' && email != '') {
@@ -114,7 +114,7 @@ function buscar_usuario() {
                 }
             }
             else {
-                console.log(`\n ${NEGRITO}${VERMELHO} Usuário "${user}" não cadastrado. ${NORMAL}`);
+                console.log(`\n${NEGRITO}${VERMELHO}Usuário "${user}" não cadastrado.${NORMAL}`);
             }
         }
         // Para número [índice]
@@ -136,7 +136,7 @@ function buscar_usuario() {
                 }
             }
             else {
-                console.log(`\n ${NEGRITO}${VERMELHO} Índice [${index}] inexistente. ${NORMAL}`);
+                console.log(`\n${NEGRITO}${VERMELHO}Índice [${index}] inexistente.${NORMAL}`);
             }
         }
         readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
@@ -146,6 +146,7 @@ function buscar_usuario() {
 
 function listar_todos_usuarios(ref = false) {
     process.stdout.write(CLS);
+    console.log(`\n${NEGRITO}${AZUL}** Usuários cadastrados **${NORMAL}`);
     if (Object.values(dic).length === 0) {
         console.log('\n** Nao há usuário cadastrado! **');
         readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
@@ -170,6 +171,8 @@ function remover_usuario() {
     ref = listar_todos_usuarios(true);
 
     if (ref) {
+        let usuarioCadastrado = false;        
+
         const user = readline.question(`\n${NEGRITO}${AMARELO}Qual usuário deseja remover?${NORMAL} `);
 
         if (isNaN(user)) {
@@ -178,10 +181,14 @@ function remover_usuario() {
                     const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op === 's') {
                         delete dic[user];
-                        gravar_agenda(true);
+                        gravar_agenda(true);                        
                         break;
                     }
+                    usuarioCadastrado = true;
                 }
+            }
+            if (!usuarioCadastrado) {
+                console.log(`\n${NEGRITO}${MAGENTA}Usuário [${user}] não cadastrado.${NORMAL}`);
             }
         }
         else if (!isNaN(user)) {
@@ -193,17 +200,18 @@ function remover_usuario() {
                     const op = readline.question(`\n${NEGRITO}${VERMELHO}Usuário [${user}. ${nome}] será removido. Continuar? [N/s]:${NORMAL} `);
                     if (op == 's') {
                         delete dic[nome];
-                        gravar_agenda(true);
+                        gravar_agenda(true);                        
                         break;
                     }
+                    usuarioCadastrado = true;
                 }
                 i++;
             }
-        }
-        else {
-            print(NEGRITO, VERMELHO, '\nUsuário não cadastrado', NORMAL);
-            input(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);
-        }
+            if (!usuarioCadastrado && user != '') {
+                console.log(`\n${NEGRITO}${MAGENTA}Identificador [${user}.] não encontrado.${NORMAL}`);
+            }
+        }                
+        readline.question(`\n${NEGRITO}${VERDE}Pressione Enter para continuar.${NORMAL}`);        
     }
 }
 
