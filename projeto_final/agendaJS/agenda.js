@@ -270,20 +270,24 @@ function gravar_agenda(ref = false) {
     const contentString = JSON.stringify(dic);
     fs.writeFileSync(file1, contentString);
 
-    // txt
+    //----------------
+    
     let textoTxt = '';
     let textoCsv = '';
+    
     for (let nome in dic) {
         textoTxt += `${nome}\t${dic[nome]['fone']}\t${dic[nome]['email']}\n`;
         textoCsv += `${nome};${dic[nome]['fone']};${dic[nome]['email']}\n`;
     }
+
+    // txt
     fs.writeFileSync(file2, textoTxt, function (erro) {
         if (erro) {
             throw erro;
         }
     });
 
-    // CSV
+    // csv
     fs.writeFileSync(file3, textoCsv, function (erro) {
         if (erro) {
             throw erro;
