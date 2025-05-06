@@ -271,18 +271,20 @@ function gravar_agenda(ref = false) {
     fs.writeFileSync(file1, contentString);
 
     // txt
-    let texto = '';
+    let textoTxt = '';
+    let textoCsv = '';
     for (let nome in dic) {
-        texto += `${nome};${dic[nome]['fone']};${dic[nome]['email']}\n`;
+        textoTxt += `${nome}\t${dic[nome]['fone']}\t${dic[nome]['email']}\n`;
+        textoCsv += `${nome};${dic[nome]['fone']};${dic[nome]['email']}\n`;
     }
-    fs.writeFileSync(file2, texto, function (erro) {
+    fs.writeFileSync(file2, textoTxt, function (erro) {
         if (erro) {
             throw erro;
         }
     });
 
     // CSV
-    fs.writeFileSync(file3, texto, function (erro) {
+    fs.writeFileSync(file3, textoCsv, function (erro) {
         if (erro) {
             throw erro;
         }
